@@ -1,24 +1,10 @@
 /* 
- * Helper function for getting length of Objects
- */
-
-Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
-
-
-/* 
  * Modules loader
  */
 
 var require = function(name){
     var prefix = location.pathname
     if ($.inArray(name,require.required.modules) < 0){
-    //if (require.required.modules.indexOf(name) < 0){
         $.getJSON(prefix + '/modules/'+name+'/package.json')
         .done(function(data){
             //Deal with dependent modules
@@ -26,7 +12,6 @@ var require = function(name){
             if (Object.size(modules) > 0){
                 for (mod in modules){
                     if ($.inArray(mod,require.required.modules) < 0){
-                    //if (require.required.modules.indexOf(mod) < 0){
                         require(mod);
                         //Stop actual require and add module to stack
                         require.required.stack.push(name);
@@ -46,7 +31,6 @@ var require = function(name){
             for (el in data_urls){
                 var url = data_urls[el];
                 if ($.inArray(url,require.required.files) < 0){
-                //if (require.required.files.indexOf(url) < 0){
                     //Get proper file
                     $.get(prefix + '/modules/'+name+'/'+data_urls[el])
                     .done(function(data) {
@@ -56,7 +40,6 @@ var require = function(name){
                             case 'php':
                             case 'html':
                             case 'tpl':
-                                //this.appended
                                 $(data).appendTo('body');
                                 break;
                             case 'css':
@@ -70,7 +53,7 @@ var require = function(name){
                         require.required.files.push(url);
                         //Check if all files are included
                         i += 1;
-                        console.log(i + '/' + len + ' : ' + url)
+                        //console.log(i + '/' + len + ' : ' + url) //For debugging
                         if (i == len) {
                             $("body").trigger(name+"ready");
                             console.log(name+" ready!");
@@ -109,15 +92,32 @@ require.required = {
     'stack': []
 }
 
-//Add jquery
+/* 
+ * Include JQuery and load main module
+ */
 var script = document.createElement("script");
 script.type = "text/javascript";
 script.src = './modules/main/js/jquery.js';
 script.onload = script.onreadystatechange = function(){
     if (!script.readyState || (script.readyState === 'complete' || script.readyState === 'loaded')) {
         script.onload = script.onreadystatechange = null
+        //Load main module if any
         if($("#clirequire").attr('data-module'))
             require($("#clirequire").attr('data-module'))
     };
 }
 document.body.appendChild(script);
+
+/* 
+ * Helper function for getting length of Objects
+ */
+
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+
