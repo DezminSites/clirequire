@@ -1,6 +1,6 @@
 {
   "name": "clirequire",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Require modules in the browser as easily as you would with Node.js!",
   "main": "clirequire.js",
   "repository": {
