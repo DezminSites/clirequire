@@ -59,8 +59,8 @@ require("mymodule")
 ```
 
 And the three files declared in the main array would be loaded and:
-  - mymodule.css would be included as the href of a <link> tag appended to the <head> of the document.
-  - mymodule.html would be appended to the <body> of the document.
+  - mymodule.css would be included as the href of a &lt;link&lt; tag appended to the &lt;head&lt; of the document.
+  - mymodule.html would be appended to the &lt;body&lt; of the document.
   - mymodule.js would be evaluated.
 
 iRequire is event oriented so, after the loading of the above files, it will trigger a "mymoduleready" event to which you may respond accordingly by doing something like:
