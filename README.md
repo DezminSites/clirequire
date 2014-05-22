@@ -1,4 +1,4 @@
-Clirequire
+iRequire
 ==========
 
 How awesome would it be if you could require your favorite javascript piece of code with relevant css and html just by doing something like:
@@ -9,20 +9,20 @@ require("bootstrap")
 require("jquery-ui")
 ```
 
-Clirequire is a tiny (5k unminified) script that allows you to do so with **zero or few configuration** and **automatic dependency injection**.
+iRequire is a tiny (5k unminified) script that allows you to do so with **zero or few configuration** and **automatic dependency injection**.
 
 Dependency
 ==========
-Clirequire is dependent on [jQuery] framework which is automatically loaded!
+iRequire is dependent on [jQuery] framework which is automatically loaded!
 
 How it works
 ==========
-Clirequire expects a folder structure like:
+iRequire expects a folder structure like:
 
 ```sh
 +-- modules
-|   +-- clirequire
-|   |   +-- clirequire.js
+|   +-- irequire
+|   |   +-- irequire.js
 |   |   +-- jquery.js
 |   |   +-- package.json
 |   +-- mymodule
@@ -38,7 +38,7 @@ Clirequire expects a folder structure like:
 
 After including it with a script tag in your index.html:
 ```sh
-<script type="text/javascript" src="./modules/clirequire/clirequire.js"></script>
+<script type="text/javascript" src="./modules/irequire/irequire.js"></script>
 ```
 
 Imagine the package.json under "mymodule" folder would look like:
@@ -63,7 +63,7 @@ And the three files declared in the main array would be loaded and:
   - mymodule.html would be appended to the <body> of the document.
   - mymodule.js would be evaluated.
 
-Clirequire is event oriented so, after the loading of the above files, it will trigger a "mymoduleready" event to which you may respond accordingly by doing something like:
+iRequire is event oriented so, after the loading of the above files, it will trigger a "mymoduleready" event to which you may respond accordingly by doing something like:
 ```sh
 $("body").on("mymoduleready",function(){
     //Do something wonderful with it!
